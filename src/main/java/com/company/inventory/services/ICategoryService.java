@@ -13,6 +13,10 @@ public interface ICategoryService {
 	// Método para buscar una categoría por su ID.
 	public ResponseEntity<CategoryResponseRest> searchByID(Long id);
 	
+	// Método para guardar una categoría.
 	public ResponseEntity<CategoryResponseRest> save(Category category);
+	
+	// Método para actualizar una categoría por su ID.
+	public ResponseEntity<CategoryResponseRest> update(Category category, Long id);
 	
 }
