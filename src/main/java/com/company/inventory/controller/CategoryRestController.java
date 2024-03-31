@@ -2,6 +2,7 @@ package com.company.inventory.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,26 +22,37 @@ public class CategoryRestController {
 	@Autowired
 	private ICategoryService service;
 	
-	//Get all the categories
+	/**
+	 * Get all the categories
+	 * @return
+	 */
 	@GetMapping("/categories")
 	public ResponseEntity<CategoryResponseRest> searchCategories() {
 		ResponseEntity<CategoryResponseRest> response = service.search();
 		return response;
 	}
 	
-	//Get categories by id
+	/**
+	 * Search categories
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/categories/{id}")
 	public ResponseEntity<CategoryResponseRest> searchCategoriesById(@PathVariable Long id) {
 		ResponseEntity<CategoryResponseRest> response = service.searchByID(id);
 		return response;
 	}
 	
-	//Save categories 
-		@PostMapping("/categories")
-		public ResponseEntity<CategoryResponseRest> save(@RequestBody Category category) {
-			ResponseEntity<CategoryResponseRest> response = service.save(category);
-			return response;
-		}
+	/**
+	 * Save categories
+	 * @param category
+	 * @return
+	 */
+	@PostMapping("/categories")
+	public ResponseEntity<CategoryResponseRest> save(@RequestBody Category category) {
+		ResponseEntity<CategoryResponseRest> response = service.save(category);
+		return response;
+	}
 		
 	/**
 	 * Update categories	
@@ -48,11 +60,21 @@ public class CategoryRestController {
 	 * @param id
 	 * @return
 	 */
-	//Actualizar categories 
-		@PutMapping("/categories/{id}")
-		public ResponseEntity<CategoryResponseRest> update(@RequestBody Category category, @PathVariable Long id) {
-			ResponseEntity<CategoryResponseRest> response = service.update(category, id);
-			return response;
-		}
+	@PutMapping("/categories/{id}")
+	public ResponseEntity<CategoryResponseRest> update(@RequestBody Category category, @PathVariable Long id) {
+		ResponseEntity<CategoryResponseRest> response = service.update(category, id);
+		return response;
+	}
+	
+	/**
+	 * delete categories
+	 * @param id
+	 * @return
+	 */
+	@DeleteMapping("/categories/{id}")
+	public ResponseEntity<CategoryResponseRest> delet(@PathVariable Long id) {
+		ResponseEntity<CategoryResponseRest> response = service.deletById(id);
+		return response;
+	}
 	
 }
